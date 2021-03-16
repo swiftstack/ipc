@@ -1,4 +1,4 @@
-public actor class Condition {
+public actor Condition {
     let broadcast: Broadcast<Void>
     var isSatisfied: Bool
 

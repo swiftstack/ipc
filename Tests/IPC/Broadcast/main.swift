@@ -3,7 +3,7 @@ import Test
 
 extension Broadcast {
     @actorIndependent(unsafe)
-    var _continuations: [UnsafeContinuation<Result>] { continuations }
+    var _continuations: [UnsafeContinuation<Result, Never>] { continuations }
 
     @inline(never)
     func nop() async { }
@@ -25,8 +25,8 @@ test.case("Broadcast") {
         expect(broadcast._continuations.count == 0)
     }
 
-    try await handle1.get()
-    try await handle2.get()
+    await handle1.get()
+    await handle2.get()
 }
 
 test.run()

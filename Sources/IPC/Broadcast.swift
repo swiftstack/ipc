@@ -1,5 +1,5 @@
-public actor class Broadcast<Result> {
-    var continuations: [UnsafeContinuation<Result>]
+public actor Broadcast<Result> {
+    var continuations: [UnsafeContinuation<Result, Never>]
 
     public init() {
         continuations = []
