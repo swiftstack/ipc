@@ -1,5 +1,6 @@
 public actor Condition {
     let broadcast: Broadcast<Void>
+    /* @testable */ @actorIndependent(unsafe)
     var isSatisfied: Bool
 
     public init() {
