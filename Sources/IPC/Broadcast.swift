@@ -1,5 +1,4 @@
 public actor Broadcast<Result> {
-    /* @testable */ @actorIndependent(unsafe)
     var continuations: [UnsafeContinuation<Result, Never>]
 
     public init() {
