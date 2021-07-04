@@ -9,11 +9,11 @@ test.case("Broadcast") {
     }
 
     await Task.yield()
-    expect(broadcast.continuations.count == 1)
+    await expect(broadcast.continuations.count == 1)
 
     let handle2 = asyncTask {
         await broadcast.dispatch(true)
-        expect(broadcast.continuations.count == 0)
+        await expect(broadcast.continuations.count == 0)
     }
 
     try await handle1.get()
