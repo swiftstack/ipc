@@ -9,7 +9,7 @@ let package = Package(
             targets: ["IPC"]),
     ],
     dependencies: [
-        .package(name: "Test")
+        .package(name: "Test"),
     ],
     targets: [
         .target(
