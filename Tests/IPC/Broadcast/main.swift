@@ -16,8 +16,8 @@ test.case("Broadcast") {
         await expect(broadcast.continuations.count == 0)
     }
 
-    try await handle1.get()
-    try await handle2.get()
+    try await handle1.value
+    try await handle2.value
 }
 
 test.run()

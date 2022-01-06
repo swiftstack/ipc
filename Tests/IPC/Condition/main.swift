@@ -16,8 +16,8 @@ test.case("Condition") {
         await expect(condition.isSatisfied == true)
     }
 
-    try await handle1.get()
-    try await handle2.get()
+    try await handle1.value
+    try await handle2.value
 }
 
 test.run()
