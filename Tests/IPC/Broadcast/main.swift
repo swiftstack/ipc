@@ -1,23 +1,23 @@
 import Test
 @testable import IPC
 
-test.case("Broadcast") {
+test("Broadcast") {
     let broadcast = Broadcast<Bool>()
 
-    let handle1 = asyncTask {
+    let handle1 = Task {
         expect(await broadcast.wait() == true)
     }
 
     await Task.yield()
     await expect(broadcast.continuations.count == 1)
 
-    let handle2 = asyncTask {
+    let handle2 = Task {
         await broadcast.dispatch(true)
         await expect(broadcast.continuations.count == 0)
     }
 
-    try await handle1.value
-    try await handle2.value
+    await handle1.value
+    await handle2.value
 }
 
-test.run()
+await run()
