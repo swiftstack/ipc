@@ -1,23 +1,23 @@
 import Test
 @testable import IPC
 
-test.case("Condition") {
+test("Condition") {
     let condition = Condition()
 
-    let handle1 = asyncTask {
+    let handle1 = Task {
         await expect(condition.isSatisfied == false)
         await condition.wait()
         await expect(condition.isSatisfied == true)
     }
 
-    let handle2 = asyncTask {
+    let handle2 = Task {
         await expect(condition.isSatisfied == false)
         await condition.notify()
         await expect(condition.isSatisfied == true)
     }
 
-    try await handle1.value
-    try await handle2.value
+    await handle1.value
+    await handle2.value
 }
 
-test.run()
+await run()
