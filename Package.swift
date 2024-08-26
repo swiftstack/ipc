@@ -13,12 +13,20 @@ let package = Package(
             targets: ["IPC"]),
     ],
     dependencies: [
-        .package(name: "Test"),
+        .package(
+            url: "https://github.com/apple/swift-testing.git",
+            from: "0.12.0"),
     ],
     targets: [
         .target(
             name: "IPC",
             swiftSettings: swift6),
+        .testTarget(
+            name: "Tests",
+            dependencies: [
+                .target(name: "IPC"),
+                .product(name: "Testing", package: "swift-testing"),
+            ]),
     ]
 )
 
@@ -30,29 +38,6 @@ let swift6: [SwiftSetting] = [
     .enableUpcomingFeature("ImplicitOpenExistentials"),
     .enableUpcomingFeature("BareSlashRegexLiterals"),
 ]
-
-// MARK: - tests
-
-testTarget("IPC") { test in
-    test("Broadcast")
-    test("Condition")
-}
-
-func testTarget(_ target: String, task: ((String) -> Void) -> Void) {
-    task { test in addTest(target: target, name: test) }
-}
-
-func addTest(target: String, name: String) {
-    package.targets.append(
-        .executableTarget(
-            name: "Tests/\(target)/\(name)",
-            dependencies: [
-                .target(name: "IPC"),
-                .product(name: "Test", package: "test"),
-            ],
-            path: "Tests/\(target)/\(name)",
-            swiftSettings: swift6))
-}
 
 // MARK: - custom package source
 
