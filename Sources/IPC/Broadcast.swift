@@ -1,4 +1,4 @@
-public actor Broadcast<Result> {
+public actor Broadcast<Result: Sendable> {
     var continuations: [UnsafeContinuation<Result, Never>]
 
     public init() {
@@ -6,8 +6,8 @@ public actor Broadcast<Result> {
     }
 
     public func wait() async -> Result {
-        await withUnsafeContinuation { continutaion in
-            continuations.append(continutaion)
+        await withUnsafeContinuation { continuation in
+            continuations.append(continuation)
         }
     }
 
