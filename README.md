@@ -1,16 +1,16 @@
-# ipc
+# IPC
 
 ## Example
 
 ```swift
 let broadcast = Broadcast<Bool>()
 
-_ = Task.runDetached {
+_ = Task.detached {
     print(await broadcast.wait())
     // prints true
 }
 
-_ = Task.runDetached {
+_ = Task.detached {
     print(await broadcast.wait())
     // prints true
 }
@@ -21,11 +21,11 @@ await broadcast.dispatch(true)
 ```swift
 let condition = Condition()
 
-_ = Task.runDetached {
+_ = Task.detached {
     await condition.wait()
 }
 
-_ = Task.runDetached {
+_ = Task.detached {
     await condition.wait()
 }
 
